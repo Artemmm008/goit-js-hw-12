@@ -3,6 +3,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const gallery = document.querySelector(".gallery")
 const loaderOverlay = document.getElementById("loader-overlay"); 
+const loadButton = document.getElementById("load-button")
 
 function createMarkup(image) {
     return `
@@ -49,5 +50,17 @@ export function showLoader() {
 export function hideLoader() {
     if (loaderOverlay) {
         loaderOverlay.classList.add('hidden');
+    }
+}
+
+export function showLoadMoreButton() {
+    if (loadButton) {
+        loadButton.classList.remove('hidden');
+    }
+}
+
+export function hideLoadMoreButton() {
+    if (loadButton) {
+        loadButton.classList.add('hidden');
     }
 }
