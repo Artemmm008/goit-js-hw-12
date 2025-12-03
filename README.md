@@ -112,6 +112,14 @@ Pages, у гілку `gh-pages`, щоразу, коли оновлюється �
    відправляється у гілку `gh-pages`. В іншому випадку, у лозі виконання скрипта
    буде вказано в чому проблема.
 
+   if (hits.length === 0) { return data; }
+
+   createGallery(hits);
+
+if (currentPage >= totalPages) { hideLoadMoreButton(); if (totalHits > 0) {
+iziToast.info({ message: "We're sorry, but you've reached the end of search
+results.", position: "bottomCenter" }); } } else { showLoadMoreButton(); }
+
 import { getImagesByQuery } from "./js/pixabay-api"; import { createGallery,
 clearGallery, showLoader, hideLoader, showLoadMoreButton, hideLoadMoreButton }
 from "./js/render-functions";

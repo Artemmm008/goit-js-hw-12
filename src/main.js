@@ -78,23 +78,29 @@ try {
     const totalHits = data.totalHits;
     totalPages = Math.ceil(totalHits / perPage);
 
-    if (hits.length === 0) {
+if (!hits.length) {
+        hideLoadMoreButton();
+        if (isFirstSearch) {
+            return data;
+        }
+        iziToast.info({
+            message: "We're sorry, but you've reached the end of search results.",
+            position: "bottomCenter",
+        });
         return data;
     }
 
     createGallery(hits);
 
-    if (currentPage >= totalPages) {
-        hideLoadMoreButton();
-        if (totalHits > 0) {
-             iziToast.info({
-                message: "We're sorry, but you've reached the end of search results.",
-                position: "bottomCenter"
-            }); 
-    }
-} else {
+    if (currentPage < totalPages) {
         showLoadMoreButton();
-}
+    } else {
+        hideLoadMoreButton();
+        iziToast.info({
+            message: "We're sorry, but you've reached the end of search results.",
+            position: "bottomCenter",
+        });
+    }
 
     return data
 }
