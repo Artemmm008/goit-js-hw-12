@@ -37,7 +37,7 @@ form.addEventListener("submit", async (e) => {
     clearGallery();
     showLoader();
     
-    const data = await fetchImages();
+    const data = await fetchImages(true);
 
     if (data && data.hits.length === 0) {
             iziToast.error({
@@ -61,13 +61,16 @@ loadButton.addEventListener("click", async () => {
     hideLoadMoreButton();
     showLoader();
 
-    await fetchImages();
+    const data = await fetchImages(false);
 
-    smoothScroll();
+    if (data && data.hits.length > 0) {
+        smoothScroll();
+    }
+    
 
 })
 
-async function fetchImages() {
+async function fetchImages(isFirstSearch) {
 
 try {
     const data = await getImagesByQuery(currentQuery, currentPage);
@@ -81,12 +84,12 @@ try {
 
     createGallery(hits);
 
-    if (currentPage > totalPages) {
+    if (currentPage >= totalPages) {
         hideLoadMoreButton();
         if (totalHits > 0) {
              iziToast.info({
                 message: "We're sorry, but you've reached the end of search results.",
-                position: "topRight"
+                position: "bottomCenter"
             }); 
     }
 } else {
